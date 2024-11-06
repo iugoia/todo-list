@@ -1,11 +1,11 @@
 <?php
 
-function user(): \App\Models\User|\Illuminate\Contracts\Auth\Authenticatable|null
+function user()
 {
-    return auth()->user();
+    return \Illuminate\Support\Facades\Auth::guard()->user();
 }
 
-function isLogged(): bool
+function getToken()
 {
-    return auth()->check();
+    return \Tymon\JWTAuth\Facades\JWTAuth::getToken();
 }
