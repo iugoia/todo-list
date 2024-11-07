@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -33,6 +34,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Board withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Column> $columns
+ * @property-read int|null $columns_count
  * @mixin \Eloquent
  */
 class Board extends Model
@@ -48,5 +51,10 @@ class Board extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function columns(): HasMany
+    {
+        return $this->hasMany(Column::class);
     }
 }
