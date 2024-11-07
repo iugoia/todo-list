@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'index']);
@@ -11,3 +10,5 @@ Route::middleware('jwt.auth')->group(function () {
     Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('refresh', [\App\Http\Controllers\AuthController::class, 'refresh']);
 });
+
+require_once __DIR__ . '/api/commons.php';

@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Services\JWTService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -35,11 +36,12 @@ class AuthController extends Controller
 
     public function user()
     {
-        return new UserResource(user());
+        return new UserResource($this->guard()->user());
     }
 
     public function logout()
     {
+        JWTAuth::invalidate(getToken());
         $this->guard()->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
